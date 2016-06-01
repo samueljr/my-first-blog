@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block html_setup %}
+<html style="height: 920px">
+{% endblock %}
+
+{% block content_lhs %}
+  <h1>Numerical Ideology</h1>
+  <h3>Empiracal Measurements</h3>
+  <p>Assigning a numerical score to each legislator's ideology is an effective way of measuring the beliefs of each legislator.  By observing how often legislators vote together on controversial items, it is possible to objectively determine how liberal or conservative any member is.  Since we are only observing how often legislators vote together, this method is purely mathematical in nature, and is therefore entirely nonpartisan.  It makes no judgements about the content of bills and does not impose assumptions on what it means to adhere to any particular ideology.  This makes it superior to ratings given by ideological interest groups, who must make value judgements on the content of bills.</p>
+  <h3>Easy Comparisons</h3>
+  <p>This tool allows any two legislators to be easily ranked in terms of how liberal or conservative they are.  This is more precise than the usual labeling of candidates by what pundents say.  After all, is a self-described progressive more to the left than a liberal?  Is a tea partier more conservative than very conservative?  It's hard to say.  However, it is easy to see who is voting with whom, and to draw inferences from there.  Once scores are assigned, they relative ideologies of two candidates can be directly compared.</p>
+  <h3>Contents</h3>
+  <p>This site allows you to look up ideological scores of American legislators from 1993 to 2014.  (This site will be updated as data is released for more recent years.)  Politicians are searchable by name and/or state.</p>
+{% endblock %}
+
+{% block content_rhs %}
+  <h1>The Method</h1>
+  <h3>The Ideological Mapping of American Legislatures</h3>
+  <p><i>The Ideological Mapping of American Legislatures</i> is a research paper published by Boris Shor of the Univsersity of Chicago and Nolan McCarty of Princeton University.  In that paper, they collect the data used in this site, as well as create the method used to assign numerical ideologies to each legislator.  All of the data used in this website comes directly from them, and can be downloaded from <a href="https://americanlegislatures.com/">their blog</a>.</p>
+
+  <h3>How Scores are Computed</h3>
+  <p>Shor and McCarty use two measures in determining the ideological scores of legislators - the responses to a nationally adminstered survey by Project Vote Smart, as well as results from roll call votes.  Loosely speaking, legislators who tend to vote together or who agreed on survey response questions are assigned similar scores.  Finally, by convention, the average score of republicans must be higher than the average score of democrats - because of this, lower numbers are associated with more liberal legislators, and higher numbers with more conservative legislators.  For a more detailed description, check out their <a href="https://americanlegislatures.com/papers/">research paper</a>.</p>
+
+{% endblock %}

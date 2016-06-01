@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% url 'view_results' argument %}
+
+{% block html_setup %}
+<html>
+{% endblock %}
+
+{% block content_lhs %}
+    <form method="POST" class = "get-form" action= "{% url 'perform_search_posts_action' %}" style="margin-left:auto;margin-right:auto;">{% csrf_token %}
+        <h1>Search for politicians by name and state:</h1>
+        <p class="search_name"> 
+            <label for="search_name">Name: </label>
+            <input type="text" name="search_name" id="search_name" /> 
+        </p>   
+        <p class="search_state"> 
+            <label for="search_state">State: </label>
+            <input type="text" name="search_state" id="search_state" /> 
+        </p> 
+        <p class="submit"> 
+            <input type="submit" value="Send" /> 
+        </p> 
+    </form>
+
+{% endblock %}
+
+{% block content_rhs %}
+  <table>
+    <caption>Search Results</caption>
+    <tr>
+      <th>Name</th>
+      <th>Party</th>
+      <th>State</th>
+      <th>Nps Score</th>
+    </tr>
+  {% for post in posts %}
+    <tr>
+      <td> <a href= "{% url 'details' my_id=post.id%}" %> {{post.name}} </td>
+      <td> {{post.party}} </td>
+      <td> {{post.state_code}} </td>
+      <td> {{post.np_score}} </td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endblock %}
+

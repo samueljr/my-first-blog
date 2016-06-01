@@ -30,6 +30,3 @@ def view_results(request, name, state):
 def bad_search(request, reason):
     return render(request, 'blog/bad_search.html', {'reason': reason})
 
-def details(request, my_id):
-    posts = Post.objects.filter(id=my_id).order_by('name')
-    return render(request, 'blog/details.html', {'posts': posts})

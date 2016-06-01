@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %}
+
+{% block html_setup %}
+<html style="height: 420px">
+{% endblock %}
+
+{% block content_lhs %}
+    <form method="POST" class = "get-form" action= "{% url 'perform_search_posts_action' %}" style="margin-left:auto;margin-right:auto;">{% csrf_token %}
+        <h1>Search for politicians by name and state:</h1>
+        <p class="search_name"> 
+            <label for="search_name">Name: </label>
+            <input type="text" name="search_name" id="search_name" /> 
+        </p>   
+        <p class="search_state"> 
+            <label for="search_state">State: </label>
+            <input type="text" name="search_state" id="search_state" /> 
+        </p> 
+        <p class="submit"> 
+            <input type="submit" value="Send" /> 
+        </p> 
+    </form>
+{% endblock %}
+
+{% block content_rhs %}
+    {% for post in posts %}
+        <h1>{{post.name|cut:";"}}</h1>
+        <p style="width: 90%"> {{post.name|cut:";"}} is
+            {% if post.party ==  "D" %}
+                a Democrat
+            {% endif %} 
+            {% if post.party ==  "R" %}
+                a Republican
+            {% endif %}
+            {% if post.party ==  "I" %}
+                an Independent
+            {% endif %}
+            from {{post.state_code}}.  Their Nps score is {{post.np_score}}.  Of the 20738 individuals in the data set, there are {{post.rank}} individuals that are more liberal than {{post.name|cut:";"}}.  This means that {{post.rank_percent}} percent of legislators are more liberal than {{post.name|cut:";"}},  
+            
+            {% if post.rank > 19701 %}
+                so this legislator was very conservative.
+            {% elif post.rank > 17627 %}
+                so this legislator was conservative.
+            {% elif post.rank > 12516 %}
+                so this legislator was center-right.
+            {% elif post.rank > 10369 %}
+                so this legislator was a centrist, who slightly leaned to the right.
+            {% elif post.rank > 8221 %}
+                so this legislator was a centrist, who slightly leaned to the left.
+            {% elif post.rank > 3110 %}
+                so this legislator was center-left.
+            {% elif post.rank > 1036 %}
+                so this legislator was liberal.
+            {% elif post.rank > -1 %}
+                so this legislator was very liberal.
+            {% endif %}
+
+        </p>
+
+
+        <p>
+            {% if post.house_start != 0 %}
+                {{post.name|cut:";"}} served in the {{post.state_code}} State
+                {% if post.state_code == "CA" or post.state_code == "NV" or post.state_code == "NJ" or post.state_code == "NY" or post.state_code == "WI" %}
+                    Assembly
+                {% else %}
+                    House
+                {% endif %}
+
+                from {{post.house_start}} to {{post.house_end}}.
+            {% endif %}
+            {% if post.senate_start != 0 %}
+                {{post.name|cut:";"}} served in the {{post.state_code}} State Senate from {{post.senate_start}} to {{post.senate_end}}.
+            {% endif %} 
+        </p>       
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block html_setup %}
+<html style="height: 420px">
+{% endblock %}
+
+{% block content_lhs %}
+    <form method="POST" class = "get-form" action= "{% url 'perform_search_posts_action' %}" style="margin-left:auto;margin-right:auto;">{% csrf_token %}
+        <h1>Search for politicians by name and state:</h1>
+        <p class="search_name"> 
+            <label for="search_name">Name: </label>
+            <input type="text" name="search_name" id="search_name" /> 
+        </p>   
+        <p class="search_state"> 
+            <label for="search_state">State: </label>
+            <input type="text" name="search_state" id="search_state" /> 
+        </p> 
+        <p class="submit"> 
+            <input type="submit" value="Send" /> 
+        </p> 
+    </form>
+{% endblock %}
+
+{% block content_rhs %}
+    <h3>Directions</h3>
+    <p>Enter at least 5 letters of a legislator's name (required) and a state (optional).</p>
+{% endblock %}

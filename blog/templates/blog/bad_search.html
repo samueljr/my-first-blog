@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+
+{% block html_setup %}
+<html style="height: 420px">
+{% endblock %}
+
+{% block content_lhs %}
+  <form method="POST" class = "get-form" action= "{% url 'perform_search_posts_action' %}" style="margin-left:auto;margin-right:auto;">{% csrf_token %}
+      <h1>Search for politicians by name and state:</h1>
+      <p class="search_name"> 
+          <label for="search_name">Name: </label>
+          <input type="text" name="search_name" id="search_name" /> 
+      </p>   
+      <p class="search_state"> 
+          <label for="search_state">State: </label>
+          <input type="text" name="search_state" id="search_state" /> 
+      </p> 
+      <p class="submit"> 
+          <input type="submit" value="Send" /> 
+      </p> 
+  </form>
+{% endblock %}
+
+{% block content_rhs %}
+  <h1 style="text-align:center;">Invalid Search</h1>
+  {% if reason ==  "narrow" %}
+    <h3 style="text-align:center;">No results found</h3>
+    <p style="text-align:center;">Sorry, but we didn't find any results.  Did you enter your search correctly?</p>
+  {% endif %}
+  {% if reason ==  "broad" %}
+    <h3 style="text-align:center;">Too broad</h3>
+    <p style="text-align:center;">Please include at least 5 letters for the name.</p>
+  {% endif %}
+{% endblock %}

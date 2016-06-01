@@ -9,13 +9,6 @@ class Post(models.Model):
     state_code = models.CharField(max_length=2)
     np_score = models.CharField(max_length=7)
     id = models.IntegerField(primary_key=True)
-    house_start = models.IntegerField(default=0)
-    house_end = models.IntegerField(default=0)
-    senate_start = models.IntegerField(default=0)
-    senate_end = models.IntegerField(default=0)
-    rank = models.IntegerField(default=0)
-    rank_percent = models.IntegerField(default=0)
-
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
